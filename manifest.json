@@ -9,6 +9,7 @@
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
     {"name":"Create Video","short_name":"Create","url":"/"},
-    {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"}
+    {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"},
+    {"name":"Access & BYOK","short_name":"Access","url":"/access.html"}
   ]
 }
