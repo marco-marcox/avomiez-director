@@ -1,14 +1,14 @@
 {
-  "name": "AvoMiez Director",
+  "name": "AvoMiez Director V2.4",
   "short_name": "AvoMiez",
-  "start_url": "/",
+  "start_url": "/v24.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI director and caption studio for AvoMiez short-form video.",
+  "description": "Mobile-first AI director with image and motion references, storyboards and caption studio for AvoMiez short-form video.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Create Video","short_name":"Create","url":"/"},
+    {"name":"Create Video V2.4","short_name":"Create","url":"/v24.html"},
     {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"},
     {"name":"Access & BYOK","short_name":"Access","url":"/access.html"}
   ]
