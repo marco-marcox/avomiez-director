@@ -1,15 +1,15 @@
 {
-  "name": "AvoMiez Director V2.5",
+  "name": "AvoMiez Director V2.6",
   "short_name": "AvoMiez",
-  "start_url": "/v25.html",
+  "start_url": "/v26.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI director with image and motion references, inherited episode continuity, Extend References, storyboards and caption studio for AvoMiez short-form video.",
+  "description": "Mobile-first AI director with image and motion references, inherited episode continuity, Extend References and a smart 5000-character video prompt guard.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Create Video V2.5","short_name":"Create","url":"/v25.html"},
-    {"name":"Extend with References","short_name":"Extend","url":"/v25.html"},
+    {"name":"Create Video V2.6","short_name":"Create","url":"/v26.html"},
+    {"name":"Extend with References","short_name":"Extend","url":"/v26.html"},
     {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"},
     {"name":"Access & BYOK","short_name":"Access","url":"/access.html"}
   ]
