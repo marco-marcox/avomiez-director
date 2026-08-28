@@ -1,16 +1,16 @@
 {
-  "name": "AvoMiez Director V2.6",
+  "name": "AvoMiez Director V2.7",
   "short_name": "AvoMiez",
-  "start_url": "/v26.html",
+  "start_url": "/v27.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI director with image and motion references, inherited episode continuity, Extend References and a smart 5000-character video prompt guard.",
+  "description": "Mobile-first AI director with image and motion references, inherited episode continuity, a smart 5000-character prompt guard and universal secondary Tone Overlays for every genre.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Create Video V2.6","short_name":"Create","url":"/v26.html"},
-    {"name":"Extend with References","short_name":"Extend","url":"/v26.html"},
-    {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"},
-    {"name":"Access & BYOK","short_name":"Access","url":"/access.html"}
+    {"name":"Create Video V2.7","short_name":"Create","url":"/v27.html"},
+    {"name":"Extend with References + Tone","short_name":"Extend","url":"/v27.html"},
+    {"name":"Reimagine with Tone","short_name":"Analyze","url":"/v27.html"},
+    {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"}
   ]
 }
