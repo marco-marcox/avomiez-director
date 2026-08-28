@@ -1,8 +1,9 @@
 (()=>{
   const MAX=5000;
   const $=s=>document.querySelector(s);
+  const version=()=>window.AVOMIEZ_UI_VERSION||'V2.6';
 
-  document.title='AvoMiez Director V2.6';
+  document.title='AvoMiez Director '+version();
 
   function addLimitBanner(){
     const createPanel=$('#v25ReferenceDirector>div');
@@ -10,7 +11,7 @@
       const b=document.createElement('div');
       b.id='v26CreateLimitBanner';b.className='tiny';
       b.style.cssText='margin:8px 0;padding:8px 9px;border:1px solid #31523e;border-radius:10px;background:#0d1a14;color:#9ee6b8';
-      b.textContent='V2.6 · Final video prompts are capped at 5,000 characters. If M3 goes over, the backend intelligently compacts the prompt while protecting references, identity, timing and core action.';
+      b.textContent='Prompt Guard · Final video prompts are capped at 5,000 characters. If M3 goes over, the backend intelligently compacts the prompt while protecting references, identity, tone, timing and core action.';
       createPanel.insertBefore(b,createPanel.children[1]||null);
     }
     const ext=$('#v25ExtendReferences>div');
@@ -18,17 +19,19 @@
       const b=document.createElement('div');
       b.id='v26ExtendLimitBanner';b.className='tiny';
       b.style.cssText='margin:8px 0;padding:8px 9px;border:1px solid #31523e;border-radius:10px;background:#0d1a14;color:#9ee6b8';
-      b.textContent='V2.6 · Part 2 / Part 3 prompts: hard maximum 5,000 characters. Reference Map + continuity locks have priority during automatic compaction.';
+      b.textContent='Prompt Guard · Part 2 / Part 3 prompts: hard maximum 5,000 characters. Reference Map + continuity + active tone overlay have priority during automatic compaction.';
       ext.insertBefore(b,ext.children[1]||null);
     }
   }
 
   function upgradeLabels(){
-    const h=$('.top h1');if(h)h.textContent='AvoMiez Director V2.6';
-    const c=$('#v25ReferenceDirector .analysisBadge');if(c)c.textContent='V2.6 REFERENCE DIRECTOR';
-    const e=$('#v25ExtendReferences .analysisBadge');if(e)e.textContent='V2.6 EXTEND REFERENCES';
-    const direct=$('#direct');if(direct&&direct.textContent.includes('V2.5'))direct.textContent=direct.textContent.replace('V2.5','V2.6');
-    const info=$('#v25Info');if(info&&info.textContent.includes('V2.5'))info.textContent=info.textContent.replace('V2.5','V2.6');
+    const v=version();
+    document.title='AvoMiez Director '+v;
+    const h=$('.top h1');if(h)h.textContent='AvoMiez Director '+v;
+    const c=$('#v25ReferenceDirector .analysisBadge');if(c)c.textContent=v+' REFERENCE DIRECTOR';
+    const e=$('#v25ExtendReferences .analysisBadge');if(e)e.textContent=v+' EXTEND REFERENCES';
+    const direct=$('#direct');if(direct&&/V2\.\d/.test(direct.textContent))direct.textContent=direct.textContent.replace(/V2\.\d/g,v);
+    const info=$('#v25Info');if(info&&/V2\.\d/.test(info.textContent))info.textContent=info.textContent.replace(/V2\.\d/g,v);
   }
 
   function meterFor(target,id,label,anchor){
@@ -72,5 +75,5 @@
   const observer=new MutationObserver(refresh);
   observer.observe(document.body,{subtree:true,childList:true,characterData:true});
   refresh();
-  console.log('AvoMiez Director V2.6 prompt-limit UI ready · max '+MAX+' chars');
+  console.log('AvoMiez Director prompt-limit UI ready · '+version()+' · max '+MAX+' chars');
 })();
