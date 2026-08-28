@@ -4,8 +4,8 @@
       "maxDuration": 60
     }
   },
-  "rewrites": [
-    {"source": "/", "destination": "/v24.html"}
+  "redirects": [
+    {"source": "/", "destination": "/v24.html", "permanent": false}
   ],
   "headers": [
     {
@@ -13,7 +13,7 @@
       "headers": [
         {"key": "X-Content-Type-Options", "value": "nosniff"},
         {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
-        {"key": "Cache-Control", "value": "no-cache"}
+        {"key": "Cache-Control", "value": "no-store, max-age=0"}
       ]
     }
   ]
