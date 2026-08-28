@@ -1,79 +1,17 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AvoMiez Director V2.4</title></head><body style="margin:0;background:#080b12;color:#fff;font-family:system-ui"><div id="loading" style="min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px"><div><div style="font-size:42px">🐱</div><h2>AvoMiez Director V2.4</h2><p style="opacity:.7">Loading Reference Director…</p></div></div><script>
 (async()=>{
-  const r=await fetch('/index.html?v24base=1',{cache:'no-store'});
-  if(!r.ok)throw new Error('Could not load Director base UI');
-  let html=await r.text();
-  html=html.replaceAll('AvoMiez Director V2.3','AvoMiez Director V2.4');
-  html=html.replace('MiniMax M3 → ideas, stories, Reimagine Studio, storyboards, captions & secure BYOK','MiniMax M3 → image + motion references, Reimagine Studio, storyboards, captions & secure BYOK');
-  const runtime=`<script>
-(()=>{
-  const esc24=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const createCard=document.querySelector('#create .card');
-  const direct=document.querySelector('#direct');
-  if(!createCard||!direct)return;
-  const box=document.createElement('div');
-  box.id='v24ReferenceDirector';
-  box.innerHTML=\`<div style="margin-top:12px;padding:10px;border:1px solid #4a3b20;border-radius:13px;background:#0d1119">
-    <div class="analysisBadge">V2.4 REFERENCE DIRECTOR</div>
-    <div class="label">Image references <span class="muted">up to 9 · character, scene, style, prop, vehicle, outfit…</span></div>
-    <input id="v24RefFiles" type="file" accept="image/*" multiple>
-    <div class="tiny" style="margin-top:5px">Tip: choose the AvoMiez master sheet as <b>Character</b>. Character references are mapped first as @image1.</div>
-    <div id="v24RefGrid" class="refGrid"></div>
-    <div class="label">Motion reference <span class="muted">optional video · sampled locally into 5 keyframes</span></div>
-    <input id="v24MotionFile" type="file" accept="video/*">
-    <video id="v24MotionPreview" class="preview" controls playsinline muted></video>
-    <div class="row"><div><div class="label">Motion preset</div><select id="v24MotionPreset"><option value="balanced" selected>Balanced</option><option value="close">Stay close</option><option value="wild">Go wild</option></select></div><div><div class="label">Reference mode</div><select id="v24RefMode"><option value="assigned" selected>Use only assigned roles</option><option value="strong">Stronger visual guidance</option></select></div></div>
-    <div class="label">Preserve from motion reference</div>
-    <div class="lockGrid"><label class="lock"><input id="v24KeepCamera" type="checkbox" checked> Camera</label><label class="lock"><input id="v24KeepTiming" type="checkbox" checked> Timing</label><label class="lock"><input id="v24KeepAction" type="checkbox" checked> Core action</label><label class="lock"><input id="v24KeepInteraction" type="checkbox" checked> Interactions</label><label class="lock"><input id="v24KeepSetting" type="checkbox"> Setting</label><label class="lock"><input id="v24KeepEnding" type="checkbox"> Ending</label></div>
-    <div class="label">Creator direction <span class="muted">optional</span></div>
-    <textarea id="v24CreatorNote" style="min-height:82px" placeholder="Keep AvoMiez identity exact. Use the video only for choreography/camera/timing. Change the setting, make the payoff stronger…"></textarea>
-    <div id="v24Info" class="tiny" style="margin-top:6px">No extra references selected — standard Create still works.</div>
-  </div>\`;
-  direct.parentNode.insertBefore(box,direct);
-
-  let refs=[];
-  const TYPES=['Character','Style','Scene','Prop','Vehicle','Outfit','Secondary Character','Other'];
-  async function imageData(file){
-    return new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{try{const max=900,sc=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*sc));c.height=Math.max(1,Math.round(im.height*sc));c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',.76))}catch(e){reject(e)}};im.onerror=()=>reject(Error('Could not read image'));im.src=fr.result};fr.onerror=reject;fr.readAsDataURL(file)})
+  try{
+    const r=await fetch('/index.html?v24base=2',{cache:'no-store'});
+    if(!r.ok)throw new Error('Could not load Director base UI');
+    let html=await r.text();
+    html=html.replaceAll('AvoMiez Director V2.3','AvoMiez Director V2.4');
+    html=html.replace('MiniMax M3 → ideas, stories, Reimagine Studio, storyboards, captions & secure BYOK','MiniMax M3 → image + motion references, Reimagine Studio, storyboards, captions & secure BYOK');
+    html=html.replace('</body>','<script src="/v24.js?v=2"><\/script></body>');
+    document.open();
+    document.write(html);
+    document.close();
+  }catch(e){
+    document.querySelector('#loading').innerHTML='<div><h2>V2.4 could not load</h2><p>'+String(e.message||e)+'</p><button onclick="location.reload()" style="padding:12px 18px">Retry</button></div>';
   }
-  function drawRefs(){
-    document.querySelector('#v24RefGrid').innerHTML=refs.map((x,i)=>\`<div class="refCard"><img src="\${x.data}"><select class="v24Type" data-i="\${i}">\${TYPES.map(t=>\`<option \${t.toLowerCase()===x.type?'selected':''}>\${t}</option>\`).join('')}</select><input class="v24Label" data-i="\${i}" value="\${esc24(x.label)}" placeholder="Reference label"><input class="v24Hint" data-i="\${i}" value="\${esc24(x.hint||'')}" placeholder="How should M3 use it?"><button class="btn v24Remove" data-i="\${i}" style="width:100%;margin-top:5px;min-height:34px">Remove</button></div>\`).join('');
-    document.querySelectorAll('.v24Type').forEach(el=>el.onchange=()=>refs[+el.dataset.i].type=el.value.toLowerCase());
-    document.querySelectorAll('.v24Label').forEach(el=>el.oninput=()=>refs[+el.dataset.i].label=el.value);
-    document.querySelectorAll('.v24Hint').forEach(el=>el.oninput=()=>refs[+el.dataset.i].hint=el.value);
-    document.querySelectorAll('.v24Remove').forEach(el=>el.onclick=()=>{refs.splice(+el.dataset.i,1);drawRefs();updateInfo()});
-  }
-  function updateInfo(){const m=document.querySelector('#v24MotionFile').files?.[0];document.querySelector('#v24Info').textContent=\`${refs.length} image reference\${refs.length===1?'':'s'}\${m?' + motion video':''} ready for V2.4\`}
-  document.querySelector('#v24RefFiles').onchange=async e=>{const files=[...(e.target.files||[])].slice(0,9);refs=[];for(let i=0;i<files.length;i++){try{refs.push({data:await imageData(files[i]),type:i===0?'character':'other',label:i===0?'AvoMiez master character':files[i].name.replace(/\\.[^.]+$/,''),hint:i===0?'strict identity anchor; do not redesign AvoMiez':'use only for its assigned role'})}catch{}}drawRefs();updateInfo()};
-  document.querySelector('#v24MotionFile').onchange=e=>{const f=e.target.files?.[0],v=document.querySelector('#v24MotionPreview');if(f){v.src=URL.createObjectURL(f);v.style.display='block'}else{v.removeAttribute('src');v.style.display='none'}updateInfo()};
-
-  async function sampleVideo(file,n=5){return new Promise((resolve,reject)=>{const v=document.createElement('video'),url=URL.createObjectURL(file);v.muted=true;v.playsInline=true;v.preload='metadata';v.src=url;v.onloadedmetadata=async()=>{try{const c=document.createElement('canvas'),ctx=c.getContext('2d'),out=[];for(let i=0;i<n;i++){const t=Math.max(0,Math.min(Math.max(0,v.duration-.08),v.duration*((i+.5)/n)));await new Promise((ok,bad)=>{v.onseeked=ok;v.onerror=bad;v.currentTime=t});const sc=Math.min(1,640/v.videoWidth);c.width=Math.max(1,Math.round(v.videoWidth*sc));c.height=Math.max(1,Math.round(v.videoHeight*sc));ctx.drawImage(v,0,0,c.width,c.height);out.push(c.toDataURL('image/jpeg',.68))}URL.revokeObjectURL(url);resolve(out)}catch(e){URL.revokeObjectURL(url);reject(e)}};v.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Could not read motion video'))}})}
-  async function post(url,body){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.error||'Request failed');return j}
-  const fresh=direct.cloneNode(true);direct.replaceWith(fresh);
-  fresh.textContent='✨ DIRECT V2.4 WITH REFERENCES';
-  fresh.onclick=async()=>{
-    const errBox=document.querySelector('#createErr');errBox.innerHTML='';fresh.disabled=true;const old=fresh.textContent;fresh.textContent='M3 analyzing references…';
-    try{
-      const ordered=[...refs].sort((a,b)=>(a.type==='character'?-1:0)-(b.type==='character'?-1:0));
-      const references=ordered.map((x,i)=>({id:'@image'+(i+1),type:x.type,label:x.label||('Reference '+(i+1)),hint:x.hint||'use only for its assigned purpose'}));
-      const referenceImages=ordered.map(x=>x.data);
-      const mf=document.querySelector('#v24MotionFile').files?.[0];
-      let motionFrames=[];if(mf){fresh.textContent='Sampling motion keyframes…';motionFrames=await sampleVideo(mf,5);fresh.textContent='M3 directing V2.4…'}
-      const preserve=[];if(document.querySelector('#v24KeepCamera').checked)preserve.push('camera');if(document.querySelector('#v24KeepTiming').checked)preserve.push('timing');if(document.querySelector('#v24KeepAction').checked)preserve.push('core action');if(document.querySelector('#v24KeepInteraction').checked)preserve.push('object interactions');if(document.querySelector('#v24KeepSetting').checked)preserve.push('setting');if(document.querySelector('#v24KeepEnding').checked)preserve.push('ending');
-      const motionReference=mf?{preset:document.querySelector('#v24MotionPreset').value,preserve,note:mf.name,instructions:'Use the sampled frames only as motion, choreography, camera and timing evidence. '+(document.querySelector('#v24KeepSetting').checked?'Preserve the source setting when supported.':'Do not preserve the source setting unless creator direction asks for it.')} : null;
-      const j=await post('/api/director',{idea:document.querySelector('#idea').value,duration:+document.querySelector('#duration').value,style:document.querySelector('#style').value,audio:document.querySelector('#audio').value,loop:document.querySelector('#loop').checked,creatorNote:document.querySelector('#v24CreatorNote').value,references,referenceImages,motionReference,motionFrames});
-      if(typeof window.renderDirector==='function')window.renderDirector(j);
-      else throw Error('V2.4 renderer unavailable');
-      const plan=document.querySelector('#plan');
-      if(j.referenceCheck?.length)plan.insertAdjacentHTML('beforeend',\`<details class="acc" open><summary>V2.4 Reference Check</summary><div class="body"><ul>\${j.referenceCheck.map(x=>'<li>'+esc24(x)+'</li>').join('')}</ul></div></details>\`);
-      if(j.motionBlueprint?.length)plan.insertAdjacentHTML('beforeend',\`<details class="acc"><summary>Motion Blueprint</summary><div class="body">\${j.motionBlueprint.map(x=>\`<details class="shot"><summary>\${esc24(x.time||'Beat')}</summary><div class="body"><b>Motion:</b> \${esc24(x.motion||'')}<br><b>Camera:</b> \${esc24(x.camera||'')}<br><b>Timing:</b> \${esc24(x.timing||'')}</div></details>\`).join('')}</div></details>\`);
-      if(typeof window.tab==='function')window.tab('prompt');
-      setTimeout(()=>document.querySelector('#createOutput')?.scrollIntoView({behavior:'smooth',block:'start'}),80);
-    }catch(e){errBox.innerHTML='<div class="error">'+esc24(e.message)+'</div>'}finally{fresh.disabled=false;fresh.textContent=old}
-  };
 })();
-<\/script>`;
-  html=html.replace('</body>',runtime+'</body>');
-  document.open();document.write(html);document.close();
-})().catch(e=>{document.querySelector('#loading').innerHTML='<div><h2>V2.4 could not load</h2><p>'+String(e.message||e)+'</p><button onclick="location.reload()" style="padding:12px 18px">Retry</button></div>'});
 </script></body></html>
