@@ -2,8 +2,8 @@
   const $=s=>document.querySelector(s);
   const $$=s=>[...document.querySelectorAll(s)];
   const MIN=5,MAX=30;
-  window.AVOMIEZ_UI_VERSION='V2.8';
-  document.title='AvoMiez Director V2.8';
+  window.AVOMIEZ_UI_VERSION=window.AVOMIEZ_UI_VERSION||'V2.8';
+  document.title='AvoMiez Director '+window.AVOMIEZ_UI_VERSION;
 
   const fileStore=new Map();
   const keyOf=f=>[f?.name||'',f?.size||0,f?.lastModified||0].join('|');
@@ -67,7 +67,7 @@
     ensureStatus('#v25RefFiles','v28CreateRefStatus',9,'#v25RefGrid');
     ensureStatus('#v25ExtendFiles','v28ExtendRefStatus',9,'#v25ExtraGrid');
     ensureStatus('#refFiles','v28AnalyzeRefStatus',6,'#refGrid');
-    const info=$('#v25Info');if(info&&window.AvoMiezV25){const n=window.AvoMiezV25.createRefs?.length||0;const motion=$('#v25MotionFile')?.files?.[0];info.textContent=`${n} image reference${n===1?'':'s'}${motion?' + motion video':''} ready for V2.8 · select files again anytime to add more.`}
+    const info=$('#v25Info');if(info&&window.AvoMiezV25){const n=window.AvoMiezV25.createRefs?.length||0;const motion=$('#v25MotionFile')?.files?.[0];info.textContent=`${n} image reference${n===1?'':'s'}${motion?' + motion video':''} ready for ${window.AVOMIEZ_UI_VERSION} · select files again anytime to add more.`}
   }
 
   function replaceDuration(id,title){
@@ -111,12 +111,14 @@
   };
 
   function upgradeLabels(){
-    const h=$('.top h1');if(h)h.textContent='AvoMiez Director V2.8';
-    const p=$('.top p');if(p)p.textContent='MiniMax M3 → multi-reference add mode, custom 5–30s timing, adaptive prompt density, Tone Overlays & 5,000-char hard guard';
-    $$('.analysisBadge').forEach(b=>{b.textContent=b.textContent.replace(/V2\.[5-7]/g,'V2.8')});
-    const direct=$('#direct');if(direct)direct.textContent=direct.textContent.replace(/V2\.[5-7]/g,'V2.8');
-    const createBanner=$('#v26CreateLimitBanner');if(createBanner)createBanner.textContent='V2.8 · Hard maximum 5,000 characters. For longer 16–30s videos the backend automatically uses a leaner soft prompt budget while protecting references, identity, tone, timing and core action.';
-    const extBanner=$('#v26ExtendLimitBanner');if(extBanner)extBanner.textContent='V2.8 · Part 2 / Part 3 supports custom 5–30s duration. Longer episodes use compact time blocks and an adaptive soft prompt budget; hard maximum remains 5,000 characters.';
+    const v=window.AVOMIEZ_UI_VERSION||'V2.8';
+    document.title='AvoMiez Director '+v;
+    const h=$('.top h1');if(h)h.textContent='AvoMiez Director '+v;
+    const p=$('.top p');if(p&&v==='V2.8')p.textContent='MiniMax M3 → multi-reference add mode, custom 5–30s timing, adaptive prompt density, Tone Overlays & 5,000-char hard guard';
+    $$('.analysisBadge').forEach(b=>{b.textContent=b.textContent.replace(/V2\.[5-8]/g,v)});
+    const direct=$('#direct');if(direct)direct.textContent=direct.textContent.replace(/V2\.[5-8]/g,v);
+    const createBanner=$('#v26CreateLimitBanner');if(createBanner)createBanner.textContent=`${v} · Hard maximum 5,000 characters. For longer 16–30s videos the backend automatically uses a leaner soft prompt budget while protecting references, identity, tone, timing and core action.`;
+    const extBanner=$('#v26ExtendLimitBanner');if(extBanner)extBanner.textContent=`${v} · Part 2 / Part 3 supports custom 5–30s duration. Longer episodes use compact time blocks and an adaptive soft prompt budget; hard maximum remains 5,000 characters.`;
   }
 
   function install(){
@@ -131,5 +133,5 @@
   const observer=new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(install,30)});
   observer.observe(document.body,{subtree:true,childList:true});
   install();
-  console.log('AvoMiez Director V2.8 ready · append references · custom 5–30s · adaptive prompt density');
+  console.log('AvoMiez Director multi-reference + custom 5–30s runtime ready · '+window.AVOMIEZ_UI_VERSION);
 })();
