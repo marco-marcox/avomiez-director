@@ -4,6 +4,10 @@
       "maxDuration": 60
     }
   },
+  "rewrites": [
+    {"source": "/api/reference-builder", "destination": "/api/develop-idea"},
+    {"source": "/api/micro-drama", "destination": "/api/develop-idea"}
+  ],
   "redirects": [
     {"source": "/", "destination": "/v33.html", "permanent": false}
   ],
