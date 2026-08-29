@@ -2,6 +2,7 @@ import{AVOMIEZ_LOCK,callM3,enforcePost,send}from'../lib/gmi.js';
 import{normalizeVideoDuration,durationPromptGuidance}from'../lib/duration-policy.js';
 import{normalizeToneOverlay,toneOverlayText}from'../lib/tone-overlay.js';
 import{resolveTargetModel,modelPromptGuidance,MODEL_PROFILES_VERIFIED_AT}from'../lib/video-models.js';
+import{handleReferenceAction,handleMicroAction}from'../lib/studio-tools.js';
 
 const system=`You are the Creative Mixer / Idea Workshop inside AvoMiez Director V3.1. ${AVOMIEZ_LOCK}\nTurn a creator's RAW STORY IDEA plus CURRENT CREATIVE MIX into stronger, visually executable directions before the final production prompt is written. Preserve the creator's premise, relationships, reveals and important jokes. The selected TARGET VIDEO MODEL is part of the creative brief: shape the story so it is realistic for that model's duration, reference and audio capabilities. If the requested runtime exceeds one generation, design natural clip boundaries rather than pretending it fits. Do not flatten unusual ideas into generic cat content. Return JSON only.`;
 
@@ -14,7 +15,10 @@ function user(b){
 }
 
 export default async function handler(req,res){if(!enforcePost(req,res))return;try{
-  const b=req.body||{};if(!String(b.idea||'').trim())return send(res,400,{error:'Write your story idea first.'});
+  const b=req.body||{},action=String(b.action||'');
+  if(action.startsWith('reference-'))return handleReferenceAction(b,res);
+  if(action.startsWith('micro-'))return handleMicroAction(b,res);
+  if(!String(b.idea||'').trim())return send(res,400,{error:'Write your story idea first.'});
   const refs=Array.isArray(b.references)?b.references.slice(0,9):[],imgs=Array.isArray(b.referenceImages)?b.referenceImages.slice(0,9):[],duration=normalizeVideoDuration(b.duration);
   const target=resolveTargetModel(b.targetModel||'auto',{duration,referenceCount:refs.length,motion:!!b.motionReference,audio:String(b.audio||'').toLowerCase()!=='none'});
   const prompt=user({...b,references:refs});let r;
