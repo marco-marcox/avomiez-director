@@ -1,16 +1,16 @@
 {
-  "name": "AvoMiez Director V3.0",
+  "name": "AvoMiez Director V3.1",
   "short_name": "AvoMiez",
-  "start_url": "/v30.html",
+  "start_url": "/v31.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI director with Voice Idea Input, Creative Mixer / Idea Workshop, multi-reference continuity, custom 5-30 second duration, Tone Overlays and a 5000-character hard prompt guard.",
+  "description": "Mobile-first AI video director with Voice Idea Input, Creative Mixer, target-model intelligence for Seedance, Kling, MiniMax H3, PixVerse and HappyHorse, multi-reference continuity, custom 5-30 second duration and model-aware prompt limits.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Voice Idea V3.0","short_name":"Voice Idea","url":"/v30.html"},
-    {"name":"Idea Workshop","short_name":"Workshop","url":"/v30.html"},
-    {"name":"Extend with References","short_name":"Extend","url":"/v30.html"},
+    {"name":"Model Intelligence V3.1","short_name":"Models","url":"/v31.html"},
+    {"name":"Voice Idea","short_name":"Voice Idea","url":"/v31.html"},
+    {"name":"Extend with References","short_name":"Extend","url":"/v31.html"},
     {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"}
   ]
 }
