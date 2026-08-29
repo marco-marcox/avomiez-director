@@ -1,16 +1,16 @@
 {
-  "name": "AvoMiez Director V2.9",
+  "name": "AvoMiez Director V3.0",
   "short_name": "AvoMiez",
-  "start_url": "/v29.html",
+  "start_url": "/v30.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI director with Creative Mixer / Idea Workshop, 3 story directions, multi-reference continuity, custom 5-30 second duration, Tone Overlays and a 5000-character hard prompt guard.",
+  "description": "Mobile-first AI director with Voice Idea Input, Creative Mixer / Idea Workshop, multi-reference continuity, custom 5-30 second duration, Tone Overlays and a 5000-character hard prompt guard.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Idea Workshop V2.9","short_name":"Workshop","url":"/v29.html"},
-    {"name":"Create Video","short_name":"Create","url":"/v29.html"},
-    {"name":"Extend with References","short_name":"Extend","url":"/v29.html"},
+    {"name":"Voice Idea V3.0","short_name":"Voice Idea","url":"/v30.html"},
+    {"name":"Idea Workshop","short_name":"Workshop","url":"/v30.html"},
+    {"name":"Extend with References","short_name":"Extend","url":"/v30.html"},
     {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"}
   ]
 }
