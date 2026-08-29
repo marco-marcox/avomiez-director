@@ -5,7 +5,7 @@
     }
   },
   "redirects": [
-    {"source": "/", "destination": "/v29.html", "permanent": false}
+    {"source": "/", "destination": "/v30.html", "permanent": false}
   ],
   "headers": [
     {
