@@ -1,16 +1,16 @@
 {
-  "name": "AvoMiez Director V2.7",
+  "name": "AvoMiez Director V2.8",
   "short_name": "AvoMiez",
-  "start_url": "/v27.html",
+  "start_url": "/v28.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI director with image and motion references, inherited episode continuity, a smart 5000-character prompt guard and universal secondary Tone Overlays for every genre.",
+  "description": "Mobile-first AI director with add-more image references, custom 5-30 second duration, adaptive prompt density, inherited continuity, Tone Overlays and a 5000-character hard prompt guard.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Create Video V2.7","short_name":"Create","url":"/v27.html"},
-    {"name":"Extend with References + Tone","short_name":"Extend","url":"/v27.html"},
-    {"name":"Reimagine with Tone","short_name":"Analyze","url":"/v27.html"},
+    {"name":"Create Video V2.8","short_name":"Create","url":"/v28.html"},
+    {"name":"Extend with References + Tone","short_name":"Extend","url":"/v28.html"},
+    {"name":"Reimagine 5-30s","short_name":"Analyze","url":"/v28.html"},
     {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"}
   ]
 }
