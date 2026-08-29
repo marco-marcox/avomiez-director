@@ -6,7 +6,7 @@
     let html=await r.text();
     html=html.replaceAll('AvoMiez Director V2.3','AvoMiez Director V3.1');
     html=html.replace('MiniMax M3 → ideas, stories, Reimagine Studio, storyboards, captions & secure BYOK','Voice Idea → Creative Mixer → Model Intelligence → model-optimized 5–30s prompts');
-    html=html.replace('</body>','<script>window.AVOMIEZ_UI_VERSION="V3.1";<\/script><script src="/v25.js?v=7"><\/script><script src="/v26.js?v=6"><\/script><script src="/v27.js?v=5"><\/script><script src="/v28.js?v=4"><\/script><script src="/v29.js?v=3"><\/script><script src="/v30.js?v=2"><\/script><script src="/v31.js?v=1"><\/script></body>');
+    html=html.replace('</body>','<script>window.AVOMIEZ_UI_VERSION="V3.1";<\/script><script src="/v25.js?v=7"><\/script><script src="/v26.js?v=6"><\/script><script src="/v27.js?v=5"><\/script><script src="/v28.js?v=4"><\/script><script src="/v29.js?v=3"><\/script><script src="/v30.js?v=2"><\/script><script src="/v31.js?v=2"><\/script><script src="/v31-split.js?v=1"><\/script></body>');
     document.open();document.write(html);document.close();
   }catch(e){document.querySelector('#loading').innerHTML='<div><h2>V3.1 could not load</h2><p>'+String(e.message||e)+'</p><button onclick="location.reload()" style="padding:12px 18px">Retry</button></div>'}
 })();
