@@ -1,16 +1,16 @@
 {
-  "name": "AvoMiez Director V3.3",
+  "name": "AvoMiez Director V3.4",
   "short_name": "AvoMiez",
-  "start_url": "/v33.html",
+  "start_url": "/v34.html",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#0f1624",
-  "description": "Mobile-first AI video director with Micro Drama Studio, Voice Idea Input, Creative Mixer, target-model intelligence, Reference Builder / Cast & World Kit, multi-reference continuity and model-aware clip prompts.",
+  "description": "Mobile-first AI video director with Micro Drama Studio, Voice Idea Input, Creative Mixer, target-model intelligence, Reference Builder and a PixVerse V6 final prompt optimizer based on current official guidance.",
   "icons": [{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
   "shortcuts": [
-    {"name":"Micro Drama Studio V3.3","short_name":"Micro Drama","url":"/v33.html"},
-    {"name":"Reference Builder","short_name":"References","url":"/v33.html"},
-    {"name":"Model Intelligence","short_name":"Models","url":"/v33.html"},
+    {"name":"PixVerse V6 Optimizer","short_name":"PixVerse V6","url":"/v34.html"},
+    {"name":"Micro Drama Studio","short_name":"Micro Drama","url":"/v34.html"},
+    {"name":"Reference Builder","short_name":"References","url":"/v34.html"},
     {"name":"Caption Studio","short_name":"Captions","url":"/captions.html"}
   ]
 }
