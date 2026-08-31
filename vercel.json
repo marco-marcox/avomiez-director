@@ -9,7 +9,7 @@
     {"source": "/api/micro-drama", "destination": "/api/develop-idea"}
   ],
   "redirects": [
-    {"source": "/", "destination": "/v33.html", "permanent": false}
+    {"source": "/", "destination": "/v34.html", "permanent": false}
   ],
   "headers": [
     {
